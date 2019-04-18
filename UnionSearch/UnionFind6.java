@@ -32,7 +32,7 @@ public class UnionFind6 implements UnionFind {
 			parent[aRoot] = bRoot;
 		} else { // rank[bRoot] = rank[aRoot]
 			parent[aRoot] = bRoot;
-			parent[bRoot] += 1;
+			rank[bRoot] += 1;
 		}
 	}
 	
@@ -43,12 +43,27 @@ public class UnionFind6 implements UnionFind {
 	
 	// 该方法用于查找index的根节点
 	private int find (int index) {
+		// 如果已经是根节点了, 那么就返回该根节点给上一层接收
+		if (parent[index] == index) {
+			return index;
+		}
+		
+		// 不是根节点的情况, 则将当前值指向其父亲节点指向的根节点
+		parent[index] = find(parent[index]);
+		
+		// 最后一定要将该节点指向的根节点返回给上一层接收
+		return parent[index];
+		
+	/*	
+	 实现二: 
 		if (index != parent[index]) { // 如果当前索引不是根节点
 			parent[index] = find(parent[index]); // 将index所指向的父节点 指向了其父节点的根节点
 		}
 		
 		return parent[index]; // 这里当我们遍历到根节点的时候, 就返回它本身, 然后上一个节点就会指向它,
 									//  同时上一个节点返回的也是这个节点, 那么上上个节点接收到后仍然会指向这个根节点
+									  
+	 */
 	}
 	
 	@Override 

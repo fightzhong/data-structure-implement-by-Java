@@ -3,7 +3,9 @@ package UnionSearch;
 /*
  	第五个版本的并查集: 路径压缩
  	在find的操作的时候, 对每一个查找的元素, 都使其指向其祖先元素, 以此来达到压缩路径的效果, 
- 	相对于基于rank优化的来说, 其仅仅改变了find的部分实现
+ 	相对于基于rank优化的来说, 其仅仅改变了find的部分实现, 并且我们在进行路径压缩的过程中, 不再去维护
+ 	rank的语义, 仅仅只用于在合并的过程中一个比较操作而已, 由于路径压缩的存在, 有可能导致i的深度比j小
+ 	但是rank数组中i的深度却比j大的情况
  */
 public class UnionFind5 implements UnionFind {
 	private int[] parent;
@@ -27,12 +29,12 @@ public class UnionFind5 implements UnionFind {
 			return;
 		
 		if (rank[aRoot] < rank[bRoot]) {
-			parent[bRoot] = aRoot;
-		} else if (rank[bRoot] < rank[aRoot]) {
 			parent[aRoot] = bRoot;
+		} else if (rank[bRoot] < rank[aRoot]) {
+			parent[bRoot] = aRoot;
 		} else { // rank[bRoot] = rank[aRoot]
 			parent[aRoot] = bRoot;
-			parent[bRoot] += 1;
+			rank[bRoot] += 1;
 		}
 	}
 	

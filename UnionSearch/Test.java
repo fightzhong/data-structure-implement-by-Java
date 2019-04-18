@@ -9,9 +9,11 @@ public class Test {
 		
 //		test(new UnionFind1(dataNumber), operatorNumber, dataNumber);
 		System.out.println("==================");
-		test(new UnionFind2(dataNumber), operatorNumber, dataNumber);
+		test(new UnionFind5(dataNumber), operatorNumber, dataNumber);
 		System.out.println("==================");
-		test(new UnionFind3(dataNumber), operatorNumber, dataNumber);
+		test(new UnionFind4(dataNumber), operatorNumber, dataNumber);
+		System.out.println("==================");
+		test(new UnionFind6(dataNumber), operatorNumber, dataNumber);
 	}
 	
 	public static void test (UnionFind unionFind, int operatorNumber, int dataNumber) {
