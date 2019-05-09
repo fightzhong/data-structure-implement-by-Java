@@ -6,7 +6,7 @@ import StackAndQueue.ArrayQueue;
 import StackAndQueue.Queue;
 
 public class BinarySearchTree<T extends Comparable<T>> {
-	private class Node {
+	class Node {
 		T data;
 		Node left;
 		Node right;
@@ -26,7 +26,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	private Node root;
 	private int size;
 	
-	public BinarySearchTree () {
+	public Node getRoot() {
+        return root;
+    }
+
+    public BinarySearchTree () {
 		root = null;
 		size = 0;
 	}
