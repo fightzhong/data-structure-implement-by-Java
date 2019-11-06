@@ -222,6 +222,18 @@ public class AVLTree<K extends Comparable<K>, V> implements Map<K, V>{
 			curNode.height = 1 + Math.max(getHeight(curNode.left), getHeight(curNode.right));
 			// 当高度值改变后, 就要开始判断以curNode为根节点的树是否满足平衡二叉树的性质, 不满足则要进行调整
 			int balanceFactor = getBalanceFactor(curNode);
+				// 这里之所以要等于0是因为删除了一个元素后可能会出现RR,RL同时存在的情况
+				/**
+				 *    46
+				 *      \
+				 *      54
+				 *      / \
+				 *     50 82
+				 *        / \
+				 *       56 85
+				 * 如该例子, 删除了50后就出现了RR,RL同时存在的情况, 那么getBalanceFactor(curNode.right)
+				 * 就等于0了, 此时选择其中RR/RL方案进行调整即可
+				 */
 				if (balanceFactor > 1 && getBalanceFactor(curNode.left) >= 0) 
 					return rightRotate(curNode);
 				
